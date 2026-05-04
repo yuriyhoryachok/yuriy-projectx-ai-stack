@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NovaTech Solutions — PayFlow Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0c0f;
+    --paper: #f5f2eb;
+    --cream: #ede9df;
+    --accent: #c8a96e;
+    --accent2: #2d5a3d;
+    --muted: #6b6760;
+    --rule: #d4cfc5;
+    --card: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--ink);
+    border-bottom: 1px solid #1e2228;
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+
+  nav a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-left: 2rem;
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 70% 50%, rgba(200,169,110,0.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(45,90,61,0.1) 0%, transparent 60%);
+  }
+
+  .hero-inner {
+    max-width: 900px; margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    color: #9a9690;
+    max-width: 520px;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    border-top: 1px solid #1e2228;
+    padding-top: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    color: var(--paper);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 5rem 2rem;
+  }
+
+  .section-inner {
+    max-width: 900px; margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::after {
+    content: '';
+    display: inline-block;
+    flex: 1; max-width: 48px;
+    height: 1px; background: var(--accent2);
+  }
+
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .lead {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.75;
+    margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT GRID ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 3rem;
+  }
+
+  .about-cell {
+    background: var(--card);
+    padding: 2rem;
+  }
+
+  .about-cell-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .about-cell-value {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* ── PRODUCT CARD ── */
+  .product-card {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem;
+    border-radius: 2px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card::after {
+    content: 'PayFlow';
+    position: absolute;
+    right: -1rem; top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'DM Serif Display', serif;
+    font-size: 7rem;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+
+  .product-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card p {
+    font-size: 0.9rem;
+    color: #9a9690;
+    line-height: 1.7;
+  }
+
+  .product-tag {
+    display: inline-block;
+    background: rgba(200,169,110,0.15);
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+
+  .feature-list li {
+    font-size: 0.88rem;
+    color: #9a9690;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+  }
+
+  .feature-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    flex-shrink: 0;
+    margin-top: 0.05rem;
+  }
+
+  /* ── TEAM ── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .team-card {
+    background: var(--card);
+    padding: 1.75rem;
+    transition: background 0.2s;
+  }
+
+  .team-card:hover { background: var(--cream); }
+
+  .team-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    flex-shrink: 0;
+  }
+
+  .team-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .team-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .team-note {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ── TECH STACK ── */
+  .stack-section {
+    background: var(--cream);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .stack-item {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 1.25rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .stack-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .stack-category {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stack-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+
+  /* ── LOCATION ── */
+  .location-bar {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 2.5rem 2rem;
+    display: flex; justify-content: center;
+  }
+
+  .location-inner {
+    max-width: 900px; width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  .location-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+  }
+  .location-text span { color: var(--accent); }
+
+  .location-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #666;
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #05070a;
+    color: #444;
+    padding: 2rem;
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+  }
+
+  footer span { color: #666; }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.22s; }
+  .delay-3 { animation-delay: 0.36s; }
+  .delay-4 { animation-delay: 0.5s; }
+
+  @media (max-width: 640px) {
+    .about-grid, .product-card { grid-template-columns: 1fr; }
+    .hero-stats { gap: 2rem; }
+    .location-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">Nova<span>Tech</span></a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#product">Product</a>
+    <a href="#team">Team</a>
+    <a href="#stack">Stack</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow fade-up">FinTech · SaaS · Chicago, IL</div>
+    <h1 class="fade-up delay-1">Payments infrastructure<br>for the <em>mid-market.</em></h1>
+    <p class="hero-sub fade-up delay-2">
+      NovaTech Solutions builds cloud-based payment processing and financial
+      analytics platforms. Our flagship product, PayFlow, handles $2B+ in
+      annual transaction volume across 1,200+ clients.
+    </p>
+    <div class="hero-stats fade-up delay-3">
+      <div class="stat-item">
+        <div class="stat-num">$2<span>B+</span></div>
+        <div class="stat-label">Annual Transaction Volume</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1,200<span>+</span></div>
+        <div class="stat-label">Business Clients</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">400<span>+</span></div>
+        <div class="stat-label">Employees</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2014</div>
+        <div class="stat-label">Founded</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">Company</div>
+    <h2>Who we are</h2>
+    <p class="lead">
+      Founded in 2014, NovaTech Solutions has grown from a Chicago startup into
+      a trusted payments infrastructure provider for mid-market businesses across
+      North America.
+    </p>
+
+    <div class="about-grid">
+      <div class="about-cell">
+        <div class="about-cell-label">Industry</div>
+        <div class="about-cell-value">FinTech / SaaS</div>
+      </div>
+      <div class="about-cell">
+        <div class="about-cell-label">Headquarters</div>
+        <div class="about-cell-value">Chicago, IL</div>
+      </div>
+      <div class="about-cell">
+        <div class="about-cell-label">Company Size</div>
+        <div class="about-cell-value">~400 employees · 60-person Engineering org</div>
+      </div>
+      <div class="about-cell">
+        <div class="about-cell-label">Work Model</div>
+        <div class="about-cell-value">Remote-first since 2022</div>
+      </div>
+      <div class="about-cell">
+        <div class="about-cell-label">Founded</div>
+        <div class="about-cell-value">2014</div>
+      </div>
+      <div class="about-cell">
+        <div class="about-cell-label">Stage</div>
+        <div class="about-cell-value">Series C · Growth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="product" style="background: var(--cream); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);">
+  <div class="section-inner">
+    <div class="section-label">Flagship Product</div>
+    <h2>PayFlow Platform</h2>
+    <p class="lead">
+      A unified payment processing and analytics engine built for scale —
+      processing millions of transactions daily with 99.98% uptime SLA.
+    </p>
+
+    <div class="product-card">
+      <div>
+        <div class="product-tag">Core Platform</div>
+        <h3>PayFlow</h3>
+        <p>
+          End-to-end payment infrastructure for mid-market businesses.
+          From checkout to reconciliation, PayFlow handles the full transaction
+          lifecycle with real-time reporting and compliance built in.
+        </p>
+      </div>
+      <div>
+        <ul class="feature-list">
+          <li>Real-time payment processing across 40+ methods</li>
+          <li>Financial analytics dashboard with custom reporting</li>
+          <li>PCI-DSS Level 1 compliance, SOC 2 Type II certified</li>
+          <li>Multi-currency support across 35 countries</li>
+          <li>REST API + webhooks for full developer control</li>
+          <li>99.98% uptime SLA with 24/7 monitoring</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-inner">
+    <div class="section-label">People</div>
+    <h2>Platform Engineering team</h2>
+    <p class="lead">
+      The team responsible for the infrastructure, CI/CD platform, and
+      developer tooling that powers PayFlow at scale.
+    </p>
+
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">MC</div>
+        <div class="team-name">Maria Chen</div>
+        <div class="team-role">VP of Engineering</div>
+        <div class="team-note">Drives platform reliability initiatives. Champions engineering velocity.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">JO</div>
+        <div class="team-name">James Okafor</div>
+        <div class="team-role">Engineering Manager, Platform</div>
+        <div class="team-note">Direct manager. Kubernetes advocate. Focused on team growth and delivery.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">SR</div>
+        <div class="team-name">Sofia Reyes</div>
+        <div class="team-role">Senior DevOps Engineer</div>
+        <div class="team-note">Owns monitoring & observability. Built the Grafana + Loki stack.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">DV</div>
+        <div class="team-name">Dmitri Volkov</div>
+        <div class="team-role">Cloud Infrastructure Engineer</div>
+        <div class="team-note">AWS networking & security specialist. Manages VPC, IAM, and security groups.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">PN</div>
+        <div class="team-name">Priya Nair</div>
+        <div class="team-role">Junior DevOps Engineer</div>
+        <div class="team-note">Mentored on CI/CD pipelines and IaC practices. Fast learner.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">KW</div>
+        <div class="team-name">Kevin Walsh</div>
+        <div class="team-role">CTO</div>
+        <div class="team-note">Sponsors platform modernization initiative. Executive stakeholder.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="stack" class="stack-section">
+  <div class="section-inner">
+    <div class="section-label">Technology</div>
+    <h2>Current tech stack</h2>
+    <p class="lead">
+      Fully modernized infrastructure built in 2023–2024, replacing a legacy
+      EC2/Jenkins setup with a cloud-native, IaC-managed platform.
+    </p>
+
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-category">Cloud</div>
+        <div class="stack-name">AWS</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">IaC</div>
+        <div class="stack-name">Terraform</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">Containers</div>
+        <div class="stack-name">Docker + EKS</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">CI/CD</div>
+        <div class="stack-name">GitHub Actions</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">Deployments</div>
+        <div class="stack-name">Helm</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">Secrets</div>
+        <div class="stack-name">HashiCorp Vault</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">Monitoring</div>
+        <div class="stack-name">Prometheus + Grafana</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">Logging</div>
+        <div class="stack-name">Loki</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">Database</div>
+        <div class="stack-name">RDS Aurora PostgreSQL</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">Cache</div>
+        <div class="stack-name">ElastiCache Redis</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">CDN</div>
+        <div class="stack-name">CloudFront + S3</div>
+      </div>
+      <div class="stack-item">
+        <div class="stack-category">Registry</div>
+        <div class="stack-name">Amazon ECR</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION BAR -->
+<div class="location-bar">
+  <div class="location-inner">
+    <div class="location-text">
+      Headquartered in <span>Chicago, IL</span> —<br>
+      remote-first since 2022.
+    </div>
+    <div class="location-meta">
+      NovaTech Solutions, Inc.<br>
+      Founded 2014 · Series C<br>
+      Chicago, IL 60601
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2024 NovaTech Solutions, Inc.</span> · PayFlow Platform · Chicago, IL ·
+  <span>Fictional company — created for DevOps interview practice</span>
+</footer>
+
+</body>
+</html>
